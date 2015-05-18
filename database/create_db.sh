@@ -1,1 +1,1 @@
-mysql --user="root" --password="613722" < create_db.sql 
+mysql --user="root" --password="xxxxx" < create_db.sql 
