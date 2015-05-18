@@ -7,5 +7,5 @@ if __name__ == "__main__":
 
     cartola = Cartola()
     cartola.login(CARTOLA_EMAIL, CARTOLA_PASS)
-    mercado_pagina = cartola.get_mercado(1)
+    cartola.get_all_mercado()
     #for jogador in mercado_pagina['atleta']

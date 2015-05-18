@@ -32,13 +32,18 @@ class Cartola(object):
         self.session.post(CARTOLA_URL_LOGIN, data=dados)
 
 
+    def get_all_mercado(self):
+        self.get_mercado(1)
+        self.atletas = map(self.get_mercado, self.pages)
+
+
     def get_mercado(self, id):
         url_id = self.url_mercado % str(id)
         mercado = self.session.get(url_id)
-        print mercado.text
         mercado_json = json.loads(mercado.text)
+        self.rodada_id = mercado_json['rodada_id']
         self.pages = Cartola.create_all_pages(mercado_json['page'])
-        return mercado_json
+        return mercado_json['atleta']
 
 
     @staticmethod
@@ -47,9 +52,26 @@ class Cartola(object):
         return pages
 
 
+class ManagerAtletas(object):
+
+    def __init__(self, json_jogadores):
+        self.jogadores = todos_jogadores
+
+
+
+class ProcessaJogador(object):
+
+    def __init__(self, pagina_atletas):
+     self.all_scouts =  {x: 0 for x in ['FS', 'PE', 'A', 'FT',
+                        'FD', 'FF', 'G', 'I', 'PP', 'RB', 'FC',
+                        'GC', 'CA', 'CV', 'SG', 'DD', 'DP', 'GS']}
+
     def checa_rodad_mysql(con, rodada):
         pass #if(rodada in sql)
 
 
     def processa_jogador(json):
-        pass
+        scouts = self.all_scouts.copy()
+        scouts_rodada = json['scout']
+        scouts.update({s['nome']:s['quantidade']} for s in scout_rodada)
+        return scouts
